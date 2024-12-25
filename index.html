@@ -467,14 +467,14 @@
 		<script>
 			// TODO: place store links here:
 			const downloadLinks = {
-				windows: {
-					"0.0.1": "",
-				},
+				windows: {},
 				mac: {},
 				linux: {},
 				ios: {},
 				android: {},
 				web: "https://web.apexo.app",
+				// play_store: "",
+				// app_store: "",
 			};
 
 			async function getDist() {
@@ -500,7 +500,7 @@
 						document.getElementById("download-table-body").innerHTML += `
 						<tr>
 							<td><img src="./assets/images/platform-${platform}.png" /></td>
-							<td>${platform.toUpperCase()}</td>
+							<td>${platform.toUpperCase().replace("_", " ")}</td>
 							<td><a target="_blank" href="${downloadLinks[platform]}">${platform == "web" ? "Launch" : "Get"}</a></td>
 						</tr>
 						`;
