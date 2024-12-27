@@ -85,6 +85,9 @@
 								<a href="https://demo.apexo.app" target="_blank">Demo</a>
 							</li>
 							<li>
+								<a href="/changelog.html" target="_blank">Changelog</a>
+							</li>
+							<li>
 								<a
 									href="https://github.com/alselawi/apexo-flutter"
 									target="_blank"
@@ -489,6 +492,7 @@
 					const nameWithoutExtension = name.substring(0, name.lastIndexOf("."));
 					const platform = nameWithoutExtension.split("_")[1];
 					const version = nameWithoutExtension.split("_")[2];
+					if(platform == undefined) continue;
 					if (typeof downloadLinks[platform] == "string") continue;
 					if (downloadLinks[platform] == undefined) {
 						downloadLinks[platform] = {};
