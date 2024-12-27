@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Apexo Changelog</title>
+		<link rel="icon" type="image/x-icon" href="fav.png" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-touch-fullscreen" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<link
+			class="main-stylesheet"
+			href="assets/css/styles.css"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				line-height: 1.6;
+				background-color: #f9f9f9;
+				color: #333;
+				margin: 0;
+				padding: 0;
+			}
+
+			header {
+				background-color: #111;
+				color: white;
+				padding: 1rem;
+				text-align: center;
+			}
+
+			h1 {
+				display: inline-block;
+				color: #fff;
+				margin-left: 20px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+
+			h3 {
+				border: 2px solid #11111180;
+				padding: 10px;
+				border-radius: 4px;
+				border-left: 10px solid #111111;
+			}
+
+			main {
+				max-width: 800px;
+				margin: 2rem auto;
+				padding: 1rem;
+				background: white;
+				border-radius: 3px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			pre {
+				background: #eee;
+				padding: 1rem;
+				border-radius: 5px;
+				overflow-x: auto;
+			}
+
+			code {
+				font-family: monospace;
+				background: #f4f4f4;
+				padding: 0.2rem 0.4rem;
+				border-radius: 3px;
+			}
+
+			.loading {
+				text-align: center;
+				color: #777;
+			}
+
+			footer {
+				text-align: center;
+				padding: 1rem;
+				background: #f1f1f1;
+				margin-top: 2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="assets/images/logo_white.png" alt="Apexo Logo" width="170" />
+			<h1>Changelog</h1>
+		</header>
+
+		<div class="container">
+			<main id="content">
+				<p class="loading">Loading changelog...</p>
+			</main>
+		</div>
+
+		<footer>
+			<a href="/">Home</a>
+		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script>
+			const repoUrl =
+				"https://raw.githubusercontent.com/alselawi/apexo-flutter/master/CHANGELOG.md"; // Replace <username> and <repo>
+			const contentDiv = document.getElementById("content");
+
+			async function fetchChangelog() {
+				try {
+					const response = await fetch(repoUrl);
+					if (!response.ok) {
+						throw new Error(`Error fetching changelog: ${response.statusText}`);
+					}
+					const markdown = await response.text();
+					displayChangelog(markdown);
+				} catch (error) {
+					contentDiv.innerHTML = `<p style="color: red;">${error.message}</p>`;
+				}
+			}
+
+			function displayChangelog(markdown) {
+				const html = marked.marked(markdown);
+				contentDiv.innerHTML = html;
+			}
+
+			fetchChangelog();
+		</script>
+	</body>
+</html>
